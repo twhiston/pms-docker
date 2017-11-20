@@ -2,6 +2,17 @@
 
 Altered version of the plex base to work with openshift
 
+## Openshift
+
+Getting this image to run on openshift is a pain, and it's almost inevitable that you have to run
+`oc adm policy add-scc-to-group anyuid system:authenticated`
+because of s6
+even with there were some issues and they were solved as follows:
+
+- no mkdir in the dockerfile. It is assumed that /config /data and /transcode will be linked in to the container in the dc
+- make /var/run/s6 an emptyDir mount
+- change the entrypoint script to use plex:root for uid:gid
+
 # plexinc/pms-docker
 
 With our easy-to-install Plex Media Server software and your Plex apps, available on all your favorite phones, tablets, streaming devices, gaming consoles, and smart TVs, you can stream your video, music, and photo collections any time, anywhere, to any device.
