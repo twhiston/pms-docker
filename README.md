@@ -1,4 +1,6 @@
-# Official Docker container for Plex Media Server
+# Openshift Docker container for Plex Media Server
+
+Altered version of the plex base to work with openshift
 
 # plexinc/pms-docker
 

@@ -25,11 +25,11 @@ RUN \
     usermod -G users plex && \
 
 # Setup directories
-    mkdir -p \
-      /config \
-      /transcode \
-      /data \
-    && \
+    # mkdir -p \
+    #   /config \
+    #   /transcode \
+    #   /data \
+    # && \
 
 # Cleanup
     apt-get -y autoremove && \
