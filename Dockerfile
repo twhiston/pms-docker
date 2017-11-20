@@ -21,16 +21,14 @@ RUN \
       uuid-runtime \
       udev \
     && \
+    useradd -u 1001 -g 0 -G users -d /config -s /bin/false plex && \
     curl -J -L -o /tmp/s6-overlay-amd64.tar.gz https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz && \
     tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
-    useradd -U -d /config -s /bin/false plex && \
-    usermod -G users plex && \
     apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* && \
     rm -rf /var/tmp/* &&\
-    mkdir /var/run  && \
     chown -R 1001:0 /var/run
 
 EXPOSE 32400/tcp 3005/tcp 8324/tcp 32469/tcp 1900/udp 32410/udp 32412/udp 32413/udp 32414/udp
