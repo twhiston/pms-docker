@@ -21,7 +21,8 @@ RUN \
       uuid-runtime \
       udev \
     && \
-    useradd -u 1001 -g 0 -G users -d /config -s /bin/false plex && \
+    useradd  -u 1001 -U -d /config -s /bin/false plex && \
+    usermod -G root plex && \
     curl -J -L -o /tmp/s6-overlay-amd64.tar.gz https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz && \
     tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
     apt-get -y autoremove && \
@@ -44,7 +45,5 @@ COPY root/ /
 # Save version and install
 RUN \
     /installBinary.sh
-
-USER 1001
 
 HEALTHCHECK --interval=200s --timeout=100s CMD /healthcheck.sh || exit 1
